@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.137.111:3306/CacheTest?characterEncoding=UTF-8&useUnicode=true&useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 20
+    min-idle: 20
+    max-active: 40
+    #配置获取连接等待超时的时间
+    max-wait: 60000
+    #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    time-between-eviction-runs-millis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    min-evictable-idle-time-millis: 30000
+    validation-query: SELECT 'x'
+    test-while-idle: true
+    test-on-borrow: true
+    test-on-return: false
+    # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用SQL防火墙 建议打开
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+  data:
+    redis:
+      host: 192.168.137.111
+      port: 6379
+      password: 123456
+      database: 0
+      timeout: 3000
+
+
+mybatis-plus:
+  mapper-locations: classpath:com/example/cachetest/mapper/*.xml # 加载xml文件
+  configuration:
+    cache-enabled: true
+
+
