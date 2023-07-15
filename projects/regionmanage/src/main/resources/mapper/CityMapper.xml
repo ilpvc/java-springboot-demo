@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="privacy.ilpvc.regionmanage.mapper.CityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="CityMap" type="privacy.ilpvc.regionmanage.entity.City">
+        <id column="id" property="id" />
+        <result column="city_name" property="cityName" />
+        <result column="region_id" property="regionId" />
+        <result column="created_time" property="createdTime"/>
+        <collection property="addressList" column="id"
+                    select="privacy.ilpvc.regionmanage.mapper.AddressMapper.selectAddressListByCityId" />
+    </resultMap>
+
+    <select id="selectCityListByRegionId" resultMap="CityMap"
+            parameterType="int">
+        select id,city_name,region_id,created_time from tb_city where region_id = #{id};
+    </select>
+
+</mapper>
